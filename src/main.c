@@ -202,7 +202,7 @@ CreateHeader(asset_entry_t* assets, size_t asset_count, const char* output_name)
         "typedef enum\n{\n",
         asset_count, magic_number, version);
     
-    for (int i = 0; i < asset_count; i++)
+    for (size_t i = 0; i < asset_count; i++)
     {
         fprintf(header_file, "    ASSET_%s = %d,\n", assets[i].name, i);
     }
@@ -217,9 +217,9 @@ CreateHeader(asset_entry_t* assets, size_t asset_count, const char* output_name)
         "static asset_t ASSET_TABLE[] = {\n",
         asset_count);
 
-    for (int i = 0; i < asset_count; i++)
+    for (size_t i = 0; i < asset_count; i++)
     {
-        fprintf(header_file, "    [%s] = {.offset = %zu, .size = %zu},\n",
+        fprintf(header_file, "    [ASSET_%s] = {.offset = %zu, .size = %zu},\n",
                 assets[i].name, assets[i].offset, assets[i].size);
     }
     fprintf(header_file, "};\n");
