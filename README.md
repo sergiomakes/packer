@@ -57,8 +57,8 @@ packer config.txt assets
 ```
 
 This will generate:
-- `assets.gen.nxap` - Binary pack file containing all assets
-- `assets.gen.h` - C header file with asset definitions and lookup table
+- `assets.nxap` - Binary pack file containing all assets
+- `assets.h` - C header file with asset definitions and lookup table
 
 ## Configuration File Format
 

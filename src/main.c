@@ -34,7 +34,7 @@ typedef struct
     size_t size;
 } asset_entry_t;
 
-GLOBAL asset_entry_t assets[MAX_ASSETS];
+GLOBAL asset_entry_t global_assets[MAX_ASSETS];
 
 ///////////////////////////////////////////////////////////////////////////////
 // Config parser
@@ -204,7 +204,7 @@ CreateHeader(asset_entry_t* assets, size_t asset_count, const char* output_name)
     
     for (size_t i = 0; i < asset_count; i++)
     {
-        fprintf(header_file, "    ASSET_%s = %d,\n", assets[i].name, i);
+        fprintf(header_file, "    ASSET_%s = %zu,\n", assets[i].name, i);
     }
 
     fprintf(header_file,
@@ -232,29 +232,24 @@ main(int argc, char** argv)
 {
     if (argc != 3)
     {
-        printf("Usage: %s <config_file> <output_name>\n\n"
-               "Example: %s config.txt assets\n\n"
-               "Example config.txt:\n"
-               "PACKER img/background.png BACKGROUND\n",
-               argv[0], argv[0]);
-
+        printf("Usage: %s <config_file> <output_name>\n\n", argv[0]);
         return 1;
     }
 
     size_t asset_count = 0;
-    if (!ParseConfig(argv[1], assets, &asset_count))
+    if (!ParseConfig(argv[1], global_assets, &asset_count))
     {
         printf("Error: Invalid config file: %s\n", argv[1]);
         return 1;
     }
 
-    if (!CreatePacker(assets, asset_count, argv[2]))
+    if (!CreatePacker(global_assets, asset_count, argv[2]))
     {
         printf("Error: Failed to create pack file\n");
         return 1;
     }
 
-    if (!CreateHeader(assets, asset_count, argv[2]))
+    if (!CreateHeader(global_assets, asset_count, argv[2]))
     {
         printf("Error: Failed to create header file\n");
         return 1;
