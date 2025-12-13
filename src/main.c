@@ -129,7 +129,7 @@ INTERNAL bool32_t
 CreatePacker(asset_entry_t* assets, size_t asset_count, const char* output_name)
 {
     char pack_filename[MAX_PATH];
-    snprintf(pack_filename, sizeof(pack_filename), "%s.gen.nxap", output_name);
+    snprintf(pack_filename, sizeof(pack_filename), "%s.nxap", output_name);
 
     FILE *pack_file = fopen(pack_filename, "wb");
     if (!pack_file)
@@ -179,7 +179,7 @@ INTERNAL bool32_t
 CreateHeader(asset_entry_t* assets, size_t asset_count, const char* output_name)
 {
     char header_filename[MAX_PATH];
-    snprintf(header_filename, sizeof(header_filename), "%s.gen.h", output_name);
+    snprintf(header_filename, sizeof(header_filename), "%s.h", output_name);
 
     FILE *header_file = fopen(header_filename, "w");
     if (!header_file)

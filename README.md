@@ -121,13 +121,13 @@ static asset_t ASSET_TABLE[] = {
 ## Integration Example
 
 ```c
-#include "assets.gen.h"
+#include "assets.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 int main() {
     // Open the pack file
-    FILE* pack = fopen("assets.gen.nxap", "rb");
+    FILE* pack = fopen("assets.nxap", "rb");
     if (!pack) {
         printf("Failed to open pack file\n");
         return 1;
